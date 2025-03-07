@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/EndUser/Downloads/Fraud-Detection-MLOps/src/training/mlruns/0/6faf863dee8b425d87ee397ae2a843d6/artifacts
+end_time: 1741322708233
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 6faf863dee8b425d87ee397ae2a843d6
+run_name: bold-sloth-717
+run_uuid: 6faf863dee8b425d87ee397ae2a843d6
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741322699482
+status: 3
+tags: []
+user_id: EndUser

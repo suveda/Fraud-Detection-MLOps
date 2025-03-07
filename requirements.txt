@@ -1,0 +1,15 @@
+pandas
+numpy
+scikit-learn
+xgboost
+optuna
+fastapi
+uvicorn
+evidently
+prometheus_client
+boto3
+awscli
+matplotlib
+s3fs
+seaborn
+mlflow
