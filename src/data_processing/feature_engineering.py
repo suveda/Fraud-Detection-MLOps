@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from sklearn.preprocessing import  StandardScaler
+from sklearn.preprocessing import  StandardScaler,MinMaxScaler
 
 def feature_eng(input_path,output_path):
     ''' processes feature engineering'''
@@ -14,7 +14,8 @@ def feature_eng(input_path,output_path):
     df.drop(columns=['Time'], inplace=True)
 
     # Normalize the new column
-    scaler = StandardScaler()
+    #scaler = StandardScaler()
+    scaler = MinMaxScaler()
     df['Amount_per_time'] = scaler.fit_transform(df[['Amount_per_time']])
 
     df.to_csv(output_path,index=False)
