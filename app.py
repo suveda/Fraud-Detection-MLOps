@@ -1,12 +1,11 @@
 from fastapi import FastAPI, Form, Request
-from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from sklearn.preprocessing import  StandardScaler,MinMaxScaler
 import pickle
 import numpy as np
 import uvicorn
 import os
 import joblib
+import uvicorn
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
@@ -27,12 +26,6 @@ models = {
     "xgboost": xgboost_model
 }
 
-'''
-@app.get("/",response_class=HTMLResponse)
-async def index():
-    with open("index.html","r") as file:
-        return file.read()
-'''
 @app.get("/")
 async def read_root(request: Request):     
     return templates.TemplateResponse("index.html", {"request": request})
@@ -65,4 +58,9 @@ async def predict(request: Request,features: str = Form(...), amount: str = Form
     prediction_text = 'Fraud' if prediction[0] == 1 else 'Not Fraud'
 
     return templates.TemplateResponse("index.html", {"request": request, "prediction_text": prediction_text})
+
+
+if __name__ == "__main__":
+    
+    uvicorn.run(app, host="0.0.0.0", port=8000)
     
