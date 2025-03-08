@@ -44,7 +44,7 @@ def train(input_path,model_path,hyperparam_path):
 
 if __name__=='__main__':
 
-    input_path = "../../data/processed/creditcard_featured.csv"
+    input_path = "../../data/processed/creditcard_processed.csv"
     model_path = "../../data/models/fraud_model.pkl"
     hyperparam_path = "../../data/models/best_hyperparams.pkl"
 

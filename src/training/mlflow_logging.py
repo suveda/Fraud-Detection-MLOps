@@ -31,7 +31,7 @@ def flow(input_path,model_path):
 
 if __name__=="__main__":
 
-    input_path = "../../data/processed/creditcard_featured.csv"
+    input_path = "../../data/processed/creditcard_processed.csv"
     model_path = "../../data/models/fraud_model.pkl"
 
     flow(input_path,model_path)
