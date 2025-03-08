@@ -13,3 +13,4 @@ matplotlib
 s3fs
 seaborn
 mlflow
+jinja2
