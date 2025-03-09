@@ -1,5 +1,7 @@
 from fastapi import FastAPI, Form, Request
 from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
+from pathlib import Path
 import pickle
 import numpy as np
 import uvicorn
@@ -25,6 +27,9 @@ models = {
     #"random_forest": random_forest_model,
     "xgboost": xgboost_model
 }
+
+# Mount the static/css folder
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/")
 async def read_root(request: Request):     
