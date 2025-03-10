@@ -21,8 +21,8 @@ def hyperparameter_tuning(X_train, X_test , y_train, y_test):
         """Runs Optuna to find the best hyperparameters"""
 
         # Compute the scale_pos_weight for class imbalance
-        negative_class = sum(y_train == 0)  # Count of non-fraud (0)
-        positive_class = sum(y_train == 1)  # Count of fraud (1)
+        negative_class = sum(y_train == 0)  
+        positive_class = sum(y_train == 1)  
         scale_pos_weight = negative_class / positive_class
 
         params = {
@@ -102,11 +102,6 @@ def mlflow_logging(model,metrics,best_params):
     with mlflow.start_run():
         mlflow.log_params(best_params)
         mlflow.log_metric("accuracy", metrics["accuracy"])
-        '''
-        mlflow.log_metric("precision",metrics["classification_report"]['1']['precision'])
-        mlflow.log_metric("recall",metrics["classification_report"]['1']['recall'])
-        mlflow.log_metric("f1_score",metrics["classification_report"]['1']['f1-score'])'
-        '''
         mlflow.sklearn.log_model(model, "fraud_detection_model")
         mlflow.end_run()
 
