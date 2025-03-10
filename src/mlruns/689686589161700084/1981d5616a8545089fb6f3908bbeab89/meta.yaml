@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/EndUser/Downloads/Fraud-Detection-MLOps/src/mlruns/689686589161700084/1981d5616a8545089fb6f3908bbeab89/artifacts
+end_time: 1741575776705
+entry_point_name: ''
+experiment_id: '689686589161700084'
+lifecycle_stage: active
+run_id: 1981d5616a8545089fb6f3908bbeab89
+run_name: rogue-bat-897
+run_uuid: 1981d5616a8545089fb6f3908bbeab89
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741575764195
+status: 3
+tags: []
+user_id: EndUser

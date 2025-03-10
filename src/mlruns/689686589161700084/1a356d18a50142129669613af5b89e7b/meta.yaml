@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/EndUser/Downloads/Fraud-Detection-MLOps/src/mlruns/689686589161700084/1a356d18a50142129669613af5b89e7b/artifacts
+end_time: 1741574290923
+entry_point_name: ''
+experiment_id: '689686589161700084'
+lifecycle_stage: active
+run_id: 1a356d18a50142129669613af5b89e7b
+run_name: enthused-bee-175
+run_uuid: 1a356d18a50142129669613af5b89e7b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741574275305
+status: 3
+tags: []
+user_id: EndUser

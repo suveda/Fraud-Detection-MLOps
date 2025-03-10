@@ -10,8 +10,7 @@ from sklearn.model_selection import train_test_split
 #from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report,confusion_matrix,accuracy_score
 from data_ingestion import load_and_preprocess
-
-
+from imblearn.over_sampling import SMOTE
 
 def hyperparameter_tuning(X_train, X_test , y_train, y_test):
     '''
@@ -21,12 +20,18 @@ def hyperparameter_tuning(X_train, X_test , y_train, y_test):
     def tuning(trial):
         """Runs Optuna to find the best hyperparameters"""
 
+        # Compute the scale_pos_weight for class imbalance
+        negative_class = sum(y_train == 0)  # Count of non-fraud (0)
+        positive_class = sum(y_train == 1)  # Count of fraud (1)
+        scale_pos_weight = negative_class / positive_class
+
         params = {
             'max_depth': trial.suggest_int('max_depth', 3, 12),
             'n_estimators': trial.suggest_int('n_estimators', 50, 200),
             'learning_rate': trial.suggest_loguniform('learning_rate', 0.01, 0.2),
             'subsample': trial.suggest_uniform('subsample', 0.6, 1.0),
             'colsample_bytree': trial.suggest_uniform('colsample_bytree', 0.6, 1.0),
+            'scale_pos_weight': trial.suggest_loguniform('scale_pos_weight', scale_pos_weight, scale_pos_weight*2)
         }
 
         model = xgb.XGBClassifier(**params,random_state=42)
@@ -124,11 +129,15 @@ def main():
 
     X_train, X_test , y_train, y_test = train_test_split(X,y,test_size=0.2,random_state=0)
 
-    best_params = hyperparameter_tuning(X_train, X_test , y_train, y_test)
+    # Aply smote to balance the training data
+    smote = SMOTE(random_state=42)
+    X_train_resampled, y_train_resampled = smote.fit_resample(X_train, y_train)
+
+    best_params = hyperparameter_tuning(X_train_resampled, X_test , y_train_resampled, y_test)
 
     save_best_params(best_params,param_path)
 
-    model = train_model(X_train,y_train,best_params)
+    model = train_model(X_train_resampled,y_train_resampled,best_params)
 
     save_model(model,model_path)
 

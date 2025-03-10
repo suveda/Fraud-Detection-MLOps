@@ -14,3 +14,4 @@ s3fs
 seaborn
 mlflow
 jinja2
+imbalanced-learn

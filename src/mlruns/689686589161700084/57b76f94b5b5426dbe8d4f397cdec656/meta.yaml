@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/EndUser/Downloads/Fraud-Detection-MLOps/src/mlruns/689686589161700084/57b76f94b5b5426dbe8d4f397cdec656/artifacts
+end_time: 1741576786352
+entry_point_name: ''
+experiment_id: '689686589161700084'
+lifecycle_stage: active
+run_id: 57b76f94b5b5426dbe8d4f397cdec656
+run_name: mysterious-pug-779
+run_uuid: 57b76f94b5b5426dbe8d4f397cdec656
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741576774508
+status: 3
+tags: []
+user_id: EndUser
