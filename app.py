@@ -6,25 +6,20 @@ import numpy as np
 import os
 import joblib
 import pickle
-import json
-from evidently.report import Report
-from evidently.metric_preset import DataDriftPreset
-from evidently import ColumnMapping
 import uvicorn
-from fastapi.responses import Response
 
-# Create necessary folders if they don't exist
+# Setup monitoring folder
 if not os.path.exists("monitoring"):
     os.makedirs("monitoring", exist_ok=True)
 
 if not os.path.exists("templates"):
-    os.makedirs("templates", exist_ok=True)  # Templates folder for rendering HTML
+    os.makedirs("templates", exist_ok=True)  
 
 LIVE_DATA_PATH = "monitoring/live_data.csv"
 REFERENCE_DATA_PATH = "monitoring/reference_data.csv"
 
 app = FastAPI()
-templates = Jinja2Templates(directory="templates")  # Pointing to the templates directory
+templates = Jinja2Templates(directory="templates") 
 
 xgboost_path = "data/models/fraud_model.pkl"
 
@@ -43,24 +38,11 @@ models = {
 # Mount the static/css folder
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-# Load reference data (keeping only features)
+# Load reference data 
 if not os.path.exists(REFERENCE_DATA_PATH):
     df = pd.read_csv("data/processed/creditcard_processed.csv")
-    reference_features = df.drop(columns=["Class"])  # Drop target column
+    reference_features = df.drop(columns=["Class"]) 
     reference_features.to_csv(REFERENCE_DATA_PATH, index=False)
-
-# Column Mapping (for Evidently)
-column_mapping = ColumnMapping()
-column_mapping.target = None  # No target for data drift
-column_mapping.prediction = None  # Only needed for prediction drift
-
-# Evidently Reports
-data_drift_report = Report(metrics=[DataDriftPreset()])
-
-# Prometheus Metrics
-from prometheus_client import Gauge
-data_drift_detected = Gauge("data_drift_detected", "Data drift detected (1 = Yes, 0 = No)")
-
 
 @app.get("/")
 async def read_root(request: Request):
@@ -76,7 +58,7 @@ async def predict(request: Request):
     amount_per_time = amount / (time + 1)'
     '''
     form_data = await request.form()
-    input_data = form_data['features']  # Get the features (excluding Time and Amount)
+    input_data = form_data['features']  
     time = float(form_data['time'])
     amount = float(form_data['amount'])
     model = form_data['model']
